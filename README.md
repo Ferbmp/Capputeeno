@@ -4,7 +4,7 @@
 
 ## Link em produção
 
-https://capputeeno.netlify.app/
+https://capputennoApp.netlify.app
 
 ## Instalação local
 
