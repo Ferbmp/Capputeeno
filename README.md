@@ -2,10 +2,6 @@
 
 > Desafio Front-end Rocketseat
 
-## Link em produção
-
-https://capputennoApp.netlify.app
-
 ## Instalação local
 
 [Projeto não finalizado por completo]

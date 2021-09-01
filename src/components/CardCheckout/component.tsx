@@ -9,7 +9,7 @@ interface CardCheckoutProps {
 }
 
 export const CardCheckout = ({ product }: CardCheckoutProps) => {
-   const [quantity, setQuantity] = useState<number>(1);
+   const [quantity, setQuantity] = useState(1);
 
    const { handleRemoveItemFromCart, handleUpdateQuantity } =
       useContext(CartContext);
@@ -38,7 +38,6 @@ export const CardCheckout = ({ product }: CardCheckoutProps) => {
                <div className='price-container'>
                   <Selector
                      options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-                     product={product}
                      value={quantity}
                      setValue={setQuantity}
                   />

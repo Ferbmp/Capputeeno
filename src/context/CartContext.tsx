@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 
-interface Product {
+export interface Product {
    category: string;
    description: string;
    id: string;
@@ -16,9 +16,9 @@ interface CartContextType {
    itemsPrice: number;
    shippingPrice: number;
    totalPrice: number;
-   handleAddItemToCart?(product: Product): Cart;
-   handleRemoveItemFromCart?(product: Product): Cart;
-   handleUpdateQuantity?(product: Product, quantity: number): Cart;
+   handleAddItemToCart(product: Product): Cart;
+   handleRemoveItemFromCart(product: Product): Cart;
+   handleUpdateQuantity(product: Product, quantity: number): Cart;
 }
 
 const initialValue = {
