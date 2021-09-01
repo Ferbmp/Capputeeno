@@ -45,7 +45,8 @@ export const GlobalStyle = createGlobalStyle`
         background: var(--background); 
         -webkit-font-smoothing:antialiased;
     }
-    button{ 
+    button, a{ 
+        text-decoration: none;
         cursor: pointer;
     }
 

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Content } from "./style";
 import Link from "next/link";
+import { CartContext } from "../../context/CartContext";
 export const Header = () => {
+   const { cart } = useContext(CartContext);
    return (
       <Container>
          <img src='/images/capputeeno.svg' alt='capputeeno' />
@@ -11,6 +13,9 @@ export const Header = () => {
             <Link href='/checkout' passHref={true}>
                <img src='/images/bagGrey.svg' alt='' />
             </Link>
+            <div className='cart-count'>
+               <p>{cart.length}</p>
+            </div>
          </Content>
       </Container>
    );

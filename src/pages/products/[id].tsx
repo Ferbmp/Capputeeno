@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { client } from "../../services/apollo-client";
+import { formatterForCents } from "../../services/number-formatter";
 import {
    Container,
    Content,
@@ -17,7 +18,6 @@ export default function Product({ data }) {
    const { Product: product } = data;
 
    const { handleAddItemToCart, cart } = useContext(CartContext);
-   console.log("cart", cart);
 
    return (
       <Container>
@@ -32,10 +32,7 @@ export default function Product({ data }) {
                <p className='product-category'>{product.category}</p>
                <h1>{product.name}</h1>
                <h1 className='product-price'>
-                  {new Intl.NumberFormat("pt-BR", {
-                     style: "currency",
-                     currency: "BRL",
-                  }).format(product.price_in_cents / 100)}
+                  {formatterForCents(product.price_in_cents)}
                </h1>
                <p className='shipping-info'>
                   *Frete de R$ 40,00 para todo o Brasil. Grátis para compras

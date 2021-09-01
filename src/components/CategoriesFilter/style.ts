@@ -16,9 +16,10 @@ export const Options = styled.div`
    h1 {
       font-size: 1rem;
       margin: 0px 0.5rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      &:first-child {
+         border-bottom: 2px solid var(--orange);
+      }
    }
-`;
-
-export const SelectorContainer = styled.div`
-   width: fit-content;
 `;

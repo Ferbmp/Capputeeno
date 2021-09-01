@@ -5,6 +5,8 @@ import Image from "next/image";
 import React from "react";
 
 import { Filters } from "../components/CategoriesFilter/component";
+import { Status } from "../components/FetchStatus/component";
+import { Pagination } from "../components/Pagination/component";
 import { ProductCard } from "../components/ProductCard/component";
 import { Container, ProductsContainer } from "../styles/home";
 
@@ -15,6 +17,9 @@ const GET_PRODUCTS_QUERY = gql`
          name
          image_url
          price_in_cents
+      }
+      _allProductsMeta {
+         count
       }
    }
 `;
@@ -35,21 +40,31 @@ const Home: NextPage = () => {
          page: page,
       },
    });
+   if (loading) {
+      return (
+         <>
+            <Status error={false} />
+         </>
+      );
+   }
 
-   const { allProducts } = data || {};
+   if (error) {
+      <Status error={true} />;
+   }
 
-   function updatePage() {
-      setPage(page + 1);
+   const { allProducts, _allProductsMeta } = data || [];
 
+   const { count } = _allProductsMeta;
+
+   const handlePagination = (number: number) => {
+      setPage(number);
       fetchMore({
          variables: { page: page },
          updateQuery: ({ fetchMoreResult }) => {
             return fetchMoreResult;
          },
       });
-   }
-
-   console.log(allProducts);
+   };
 
    return (
       <>
@@ -58,6 +73,13 @@ const Home: NextPage = () => {
          </Head>
          <Container>
             <Filters />
+            <Pagination
+               paginate={handlePagination}
+               totalPosts={count}
+               postsPerPage={12}
+               page={page}
+               setPage={setPage}
+            />
             <ProductsContainer>
                {allProducts?.map((product: Product) => (
                   <>

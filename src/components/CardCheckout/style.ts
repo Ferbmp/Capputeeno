@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
    width: 100%;
-   max-width: 736px;
    display: flex;
    flex-direction: row;
    border-radius: 8px;
@@ -23,12 +22,39 @@ export const ImageContainer = styled.div`
 
 export const ContentContainer = styled.div`
    width: 100%;
-   padding: 0.8rem 0.5rem;
+   padding: 1rem 2rem;
    display: flex;
    flex-direction: column;
+   div {
+      &.name-container {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         button {
+            background: #fff;
+            border: none;
+         }
+      }
+
+      &.description-container {
+         margin: auto 0;
+      }
+
+      &.price-container {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         margin-top: auto;
+         p {
+            font-weight: 600;
+            font-size: 1rem;
+         }
+      }
+   }
+
    h1 {
       font-weight: 300;
       color: var(--text-dark);
-      font-size: 1.2rem;
+      font-size: 1.5rem;
    }
 `;

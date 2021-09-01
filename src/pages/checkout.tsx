@@ -2,25 +2,63 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { CardCheckout } from "../components/CardCheckout/component";
 import { CartContext } from "../context/CartContext";
-import { Container, Content, ProductList } from "../styles/checkout";
+import { formatterForCents, formatterBRL } from "../services/number-formatter";
+import {
+   Container,
+   Content,
+   ProductList,
+   ResumeContainer,
+   Resume,
+   CheckoutSection,
+} from "../styles/checkout";
 
 const Checkout = () => {
-   const { cart } = useContext(CartContext);
+   const { cart, itemsPrice, shippingPrice, totalPrice } =
+      useContext(CartContext);
 
-   console.log("checkout", cart);
    return (
       <Container>
          <Link href='/'>Voltar</Link>
          <Content>
             <ProductList>
-               <h1>Seu Carrinho</h1>
-               <p>Total ({cart.length} Produtos) R$161,00</p>
-               {cart?.map((item) => (
-                  <>
-                     <CardCheckout key={item.id} product={item} />
-                  </>
-               ))}
+               <div className='title-container'>
+                  <h1>Seu Carrinho</h1>
+                  <p>
+                     Total ({cart.length} Produtos){" "}
+                     <strong>{formatterForCents(itemsPrice)}</strong>
+                  </p>
+               </div>
+
+               {cart.length > 0 ? (
+                  cart.map((item, index) => (
+                     <>
+                        <CardCheckout key={index} product={item} />
+                     </>
+                  ))
+               ) : (
+                  <h1>Seu Carrinho está vazio</h1>
+               )}
             </ProductList>
+            <ResumeContainer>
+               <Resume>
+                  <h1>Resumo do Pedido</h1>
+                  <div>
+                     <p>Subtotal de produtos</p>
+                     <p>{formatterForCents(itemsPrice)}</p>
+                  </div>
+                  <div>
+                     <p>Entrega</p>
+                     <p>{formatterBRL(shippingPrice)}</p>
+                  </div>
+               </Resume>
+               <CheckoutSection>
+                  <div>
+                     <p>Total</p>
+                     <p>{formatterBRL(totalPrice)}</p>
+                  </div>
+                  <button>Finalizar Compra</button>
+               </CheckoutSection>
+            </ResumeContainer>
          </Content>
       </Container>
    );

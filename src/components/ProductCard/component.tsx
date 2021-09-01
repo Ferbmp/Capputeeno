@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatterForCents } from "../../services/number-formatter";
 import {
    Container,
    ProductName,
@@ -7,13 +8,19 @@ import {
    InfoContainer,
 } from "./style";
 
-export const ProductCard = ({ name, image, priceInCents, id }) => {
-   const price = new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-   }).format(priceInCents / 100);
+interface ProductCardProps {
+   name: string;
+   image: string;
+   priceInCents: number;
+   id: string;
+}
 
-   console.log("price", price);
+export const ProductCard = ({
+   name,
+   image,
+   priceInCents,
+   id,
+}: ProductCardProps) => {
    return (
       <>
          <Container>
@@ -24,7 +31,9 @@ export const ProductCard = ({ name, image, priceInCents, id }) => {
                      <ProductName>
                         <h1>{name}</h1>
                      </ProductName>
-                     <ProductPrice>{price}</ProductPrice>
+                     <ProductPrice>
+                        {formatterForCents(priceInCents)}
+                     </ProductPrice>
                   </InfoContainer>
                </Content>
             </Link>

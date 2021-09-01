@@ -6,8 +6,9 @@ export const Container = styled.div`
    height: 378px;
    max-height: 378px;
 
-   margin: 0.5rem 0.5rem;
+   margin: 0.5rem auto;
 
+   cursor: pointer;
    img {
       object-fit: cover;
 
@@ -27,7 +28,7 @@ export const Content = styled.div`
 `;
 
 export const InfoContainer = styled.div`
-   padding: 0px 16px;
+   padding: 0px 1rem;
    display: flex;
    flex-direction: column;
 `;
